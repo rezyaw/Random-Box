@@ -17,22 +17,51 @@ local prize = {
 	[16] = "your_weapon_prize",
 }
 
+local BoxOne, BoxTwo, BoxThree = nil
+
 util.AddNetworkString("giveprice")
+util.AddNetworkString("RandomOne")
+util.AddNetworkString("RandomTwo")
+util.AddNetworkString("RandomThree")
+
+net.Receive("RandomOne", function(len, ply)
+	
+	BoxOne = prize[math.random(1,16)]
+
+	ply:ChatPrint("In this box was "..BoxOne)
+	
+end)	
+	
+net.Receive("RandomTwo", function(len, ply)
+
+	BoxTwo = prize[math.random(1,16)]
+		
+	ply:ChatPrint("In this box was "..BoxTwo)
+
+end)
+
+net.Receive("RandomThree", function(len, ply)
+
+	BoxThree = prize[math.random(1,16)]
+		
+	ply:ChatPrint("In this box was "..BoxThree)
+
+end)
 
 net.Receive("giveprice", function(len, ply)
 	local use = net.ReadUInt(16)
 	
 	if use < 3 then 
-   	 ply:ChatPrint("You did not activate all the cases")
-   	else
+   	ply:ChatPrint("You did not activate all the cases")
+  else
 	  if ply:getDarkRPVar("money") < 15000 then -- change the price
-	  ply:ChatPrint("You do not have enough money to play")
+	   ply:ChatPrint("You do not have enough money to play")
 	  else
-	  ply:addMoney(-15000) -- change the price
-	  ply:Give(prize[math.random(1,16)])
-	  ply:Give(prize[math.random(1,16)])
-	  ply:Give(prize[math.random(1,16)])
-	  ply:ChatPrint("You got your gift. Spent 15000$")
+		  ply:addMoney(-15000) -- change the price
+		  ply:Give(BoxOne)
+		  ply:Give(BoxTwo)
+		  ply:Give(BoxThree)
+		  ply:ChatPrint("You got your gift. Spent 15000$")
 	  end
-    end
+  end
 end)
