@@ -49,19 +49,19 @@ net.Receive("RandomThree", function(len, ply)
 end)
 
 net.Receive("giveprice", function(len, ply)
-	local use = net.ReadUInt(16)
-	
-	if use < 3 then 
-   	ply:ChatPrint("You did not activate all the cases")
-  else
-	  if ply:getDarkRPVar("money") < 15000 then -- change the price
-	   ply:ChatPrint("You do not have enough money to play")
-	  else
-		  ply:addMoney(-15000) -- change the price
-		  ply:Give(BoxOne)
-		  ply:Give(BoxTwo)
-		  ply:Give(BoxThree)
-		  ply:ChatPrint("You got your gift. Spent 15000$")
-	  end
+ local use = net.ReadUInt(16)
+
+ if use < 3 then 
+  ply:ChatPrint("You did not activate all the cases")
+ else
+   if ply:getDarkRPVar("money") < 15000 then -- change the price
+     ply:ChatPrint("You do not have enough money to play")
+   else
+     ply:addMoney(-15000) -- change the price
+     ply:Give(BoxOne)
+     ply:Give(BoxTwo)
+     ply:Give(BoxThree)
+     ply:ChatPrint("You got your gift. Spent 15000$")
+   end
   end
 end)
