@@ -1,6 +1,5 @@
 concommand.Add("randombox", function()
 	local use = 0
-	
 	local main = vgui.Create("DFrame")
 	main:SetSize(ScrW() / 4, ScrH() / 4)
 	main:Center()
@@ -16,7 +15,6 @@ concommand.Add("randombox", function()
 		net.SendToServer()
 		main:Remove()
 	end
-	
 	
 	local window = vgui.Create("Button", main)
 	window:Dock(LEFT)
@@ -52,17 +50,32 @@ concommand.Add("randombox", function()
 	   image:SetImage("icon16/briefcase.png")
 	   window:SetDisabled(true)
 	   use = use + 1
+	   
+	   LocalPlayer():EmitSound("ambient/levels/citadel/pod_open1.wav")
+
+	   net.Start("RandomOne")
+	   net.SendToServer()
 	end
 	
 	function window2:DoClick()
 	   image2:SetImage("icon16/briefcase.png")
 	   window2:SetDisabled(true)
 	   use = use + 1
+	   
+	   LocalPlayer():EmitSound("ambient/levels/citadel/pod_open1.wav")
+	   
+	   net.Start("RandomTwo")
+	   net.SendToServer()
 	end
 	
 	function window3:DoClick()
 	   image3:SetImage("icon16/briefcase.png")
 	   window3:SetDisabled(true)
 	   use = use + 1
+	   
+	   LocalPlayer():EmitSound("ambient/levels/citadel/pod_open1.wav")
+	   
+	   net.Start("RandomThree")
+	   net.SendToServer()
 	end
 end)
